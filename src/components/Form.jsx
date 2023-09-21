@@ -4,8 +4,10 @@ import { useState } from "react";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
 
+import BackButton from "./BackButton";
+
+// eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
@@ -16,10 +18,9 @@ export function convertToEmoji(countryCode) {
 
 function Form() {
   const [cityName, setCityName] = useState("");
-  const [country, setCountry] = useState("");
+  // const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
-  const navigate = useNavigate();
 
   return (
     <form className={styles.form}>
@@ -53,15 +54,7 @@ function Form() {
 
       <div className={styles.buttons}>
         <Button type="primary">ADD</Button>
-        <Button
-          type="back"
-          navigate={(e) => {
-            e.preventDefault();
-            navigate(-1);
-          }}
-        >
-          &larr; Back
-        </Button>
+        <BackButton />
       </div>
     </form>
   );
