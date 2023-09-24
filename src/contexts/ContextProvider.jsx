@@ -27,7 +27,7 @@ function Provider({ children }) {
     fetchData();
   }, []);
 
-  async function CityDetails(id) {
+  async function getCityDetails(id) {
     try {
       setIsLoading(true);
       const res = await fetch(`http://localhost:9000/cities/${id}`);
@@ -47,8 +47,7 @@ function Provider({ children }) {
         cities,
         isLoading,
         currentCity,
-        setCurrentCity,
-        CityDetails,
+        getCityDetails,
       }}
     >
       {children}
