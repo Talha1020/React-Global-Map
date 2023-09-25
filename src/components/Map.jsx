@@ -44,7 +44,7 @@ function Map() {
   function FormNavigateComponent() {
     const mapEvents = useMapEvents({
       click: (e) => {
-        navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+        navigate(`/app/form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
       },
     });
     return null;

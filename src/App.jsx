@@ -13,6 +13,8 @@ import { Navigate } from "react-router-dom";
 import Form from "./components/Form";
 import { Provider } from "./contexts/ContextProvider";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 function App() {
   return (
     <Provider>
