@@ -16,6 +16,7 @@ function Provider({ children }) {
         setIsLoading(true);
         const res = await fetch(`${URL}/cities`);
         const data = await res.json();
+
         setCities(data);
         setIsLoading(false);
       } catch {
@@ -32,10 +33,49 @@ function Provider({ children }) {
       setIsLoading(true);
       const res = await fetch(`http://localhost:9000/cities/${id}`);
       const data = await res.json();
-      setCurrentCity(data);
+      setCurrentCity(currentCity);
       setIsLoading(false);
     } catch {
       alert("There was an error loading data");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function PostData(newData) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${URL}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+
+      setCities((cities) => [...cities, data]);
+
+      setIsLoading(false);
+    } catch {
+      alert("There was an error adding the visited city ");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function DeleteData(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`${URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+
+      setCities((cities) => cities.filter((city) => city.id !== id));
+
+      setIsLoading(false);
+    } catch {
+      alert("There was an error deleting the visited city ");
     } finally {
       setIsLoading(false);
     }
@@ -48,6 +88,8 @@ function Provider({ children }) {
         isLoading,
         currentCity,
         getCityDetails,
+        PostData,
+        DeleteData,
       }}
     >
       {children}
